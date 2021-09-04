@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/rank-items', function () {
-    return view('rank-items');
-})->middleware(['auth'])->name('rank-items');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/rank-items', [ItemController::class, 'rankItems'])->name('rank-items');
+});
 
 require __DIR__.'/auth.php';
