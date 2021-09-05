@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/create', [ItemController::class, 'create'])->name('item.create');
     Route::get('/create-approve', [ItemController::class, 'createApprove'])->name('item.create.approve');
     Route::post('/create-approve-store', [ItemController::class, 'createApproveStore'])->name('item.create.approve.store');
+    Route::post('/create-reject-store', [ItemController::class, 'createRejectStore'])->name('item.create.reject.store');
     Route::post('/store', [ItemController::class, 'store'])->name('item.store');
     Route::get('/store-success', [ItemController::class, 'storeSuccess'])->name('item.store.success');
     Route::get('/add-review/{id}', [ItemController::class, 'reviewCreate'])->name('item.review.create');

@@ -122,6 +122,13 @@ class ItemController extends Controller
         return redirect(route('item.create.approve'));
     }
 
+    public function createRejectStore(Request $request)
+    {
+        $item = Item::findOrFail($request->input('item_id'));
+        $item->delete();
+        return redirect(route('item.create.approve'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

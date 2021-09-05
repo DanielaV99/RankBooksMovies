@@ -38,8 +38,15 @@
                                 <form method="POST" action="{{ route('item.create.approve.store') }}">
                                     @csrf
                                     <input type="hidden" name="item_id" value="{{ $item->id }}"/>
-                                    <x-button class="ml-4">
+                                    <x-button class="ml-4 bg-green-500">
                                         {{ __('Approve') }}
+                                    </x-button>
+                                </form>
+                                <form method="POST" action="{{ route('item.create.reject.store') }}">
+                                    @csrf
+                                    <input type="hidden" name="item_id" value="{{ $item->id }}"/>
+                                    <x-button class="ml-4 bg-red-500">
+                                        {{ __('Reject') }}
                                     </x-button>
                                 </form>
                             </div>
