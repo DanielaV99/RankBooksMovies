@@ -18,7 +18,8 @@ class ItemController extends Controller
         $items = Item::with(['category', 'genre', 'createdBy', 'userReviews'])
             ->where('isApproved', true)
             ->get();
-        return view('rank-items', compact('items'));
+        $currentUserId = Auth::id();
+        return view('rank-items', compact('items', 'currentUserId'));
     }
 
     /**

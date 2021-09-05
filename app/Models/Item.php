@@ -34,7 +34,7 @@ class Item extends Model
 
     public function userReviews()
     {
-        return $this->belongsToMany(Item::class, 'user_reviews')
+        return $this->belongsToMany(User::class, 'user_reviews')
             ->withPivot('rank', 'comment');
     }
 }
