@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Genre;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -36,7 +37,19 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Item::create([
+            'title' => $request->input('title'),
+            'isApproved' => false,
+            'user_id' => Auth::id(),
+            'category_id' => $request->input('category'),
+            'genre_id' => $request->input('genre'),
+        ]);
+        return redirect(route('item.store.success'));
+    }
+
+    public function storeSuccess()
+    {
+        return view('storeSuccess');
     }
 
     /**

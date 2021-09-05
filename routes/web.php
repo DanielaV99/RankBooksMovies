@@ -21,6 +21,8 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/rank-items', [ItemController::class, 'rankItems'])->name('rank-items');
     Route::get('/create', [ItemController::class, 'create'])->name('item.create');
+    Route::post('/store', [ItemController::class, 'store'])->name('item.store');
+    Route::get('/store-success', [ItemController::class, 'storeSuccess'])->name('item.store.success');
 });
 
 require __DIR__.'/auth.php';
