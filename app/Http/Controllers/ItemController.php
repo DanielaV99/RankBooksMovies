@@ -53,6 +53,25 @@ class ItemController extends Controller
         return view('storeSuccess');
     }
 
+    public function reviewCreate($id)
+    {
+        $item = Item::findOrFail($id);
+        return view('add-review', compact('item'));
+    }
+
+    public function reviewStore(Request $request)
+    {
+        $item = Item::findOrFail($request->input('item_id'));
+        $item->userReviews()->attach(
+            Auth::id(),
+            [
+                'rank' => $request->input('rank'),
+                'comment' => $request->input('comment'),
+            ]
+        );
+        return redirect(route('item.store.success'));
+    }
+
     /**
      * Display the specified resource.
      */

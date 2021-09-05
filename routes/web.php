@@ -23,6 +23,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/create', [ItemController::class, 'create'])->name('item.create');
     Route::post('/store', [ItemController::class, 'store'])->name('item.store');
     Route::get('/store-success', [ItemController::class, 'storeSuccess'])->name('item.store.success');
+    Route::get('/add-review/{id}', [ItemController::class, 'reviewCreate'])->name('item.review.create');
+    Route::post('/review-store', [ItemController::class, 'reviewStore'])->name('item.review.store');
 });
 
 require __DIR__.'/auth.php';
