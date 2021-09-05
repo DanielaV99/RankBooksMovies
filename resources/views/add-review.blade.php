@@ -16,13 +16,18 @@
                             <x-label for="rank" :value="__('Rank')" />
 
                             <x-input id="rank" class="block mt-1 w-full" type="number" min="1" max="10" name="rank" :value="old('rank')" required autofocus />
+                            @error('rank')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mt-4">
                             <x-label for="comment" :value="__('Comment')" />
 
-                            <x-textarea name="comment" class="block mt-1 w-full" :value="old('comment')">
-
+                            <x-textarea name="comment" class="block mt-1 w-full" :value="old('comment')" required>
                             </x-textarea>
+                            @error('comment')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="flex items-center justify-end mt-4">
                             <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('rank-items') }}">

@@ -68,7 +68,7 @@ class ItemController extends Controller
 
     public function storeSuccess()
     {
-        return view('storeSuccess');
+        return view('store-success');
     }
 
     public function reviewCreate($id)
@@ -79,6 +79,11 @@ class ItemController extends Controller
 
     public function reviewStore(Request $request)
     {
+        $request->validate([
+            'rank' => ['required', 'integer', 'min:1', 'max:10'],
+            'comment' => ['required'],
+        ]);
+
         $item = Item::findOrFail($request->input('item_id'));
         $item->userReviews()->attach(
             Auth::id(),

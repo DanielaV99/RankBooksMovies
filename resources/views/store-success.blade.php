@@ -11,7 +11,7 @@
                 <div class="p-6 bg-green-300 border-b border-gray-200">
                     Your item was successfully submitted!
                     <br />
-                    It's under review by our administrators and it will be listed once it's approved.
+                    Our administrators will review it and it will be listed once it's approved.
                     <div class="mt-4">
                         <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('rank-items') }}">
                             {{ __('Go back') }}
