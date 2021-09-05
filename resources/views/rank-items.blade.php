@@ -6,6 +6,25 @@
     </x-slot>
 
     <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pb-12">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form method="GET" action="{{ route('rank-items') }}">
+                        <div class="inline mt-4">
+                            <x-label for="category" class="inline" :value="__('Category')" />
+
+                            <x-select id="category" class="inline ml-4" style="min-width: 200px" type="text" name="category" :options="$categories" required />
+                            <x-button class="ml-4">
+                                {{ __('Search') }}
+                            </x-button>
+                            <a href="{{ route('rank-items') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
+                                {{ __('Reset') }}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 @foreach ($items as $item)

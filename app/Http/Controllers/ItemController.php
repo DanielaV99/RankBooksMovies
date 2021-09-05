@@ -13,13 +13,21 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function rankItems()
+    public function rankItems(Request $request)
     {
         $items = Item::with(['category', 'genre', 'createdBy', 'userReviews'])
-            ->where('isApproved', true)
-            ->get();
+            ->where('isApproved', true);
+
+        $categoryId = $request->query('category');
+        if ($categoryId) {
+            $items->where('category_id', $categoryId);
+        }
+        $items = $items->get();
+
         $currentUserId = Auth::id();
-        return view('rank-items', compact('items', 'currentUserId'));
+        $categories = Category::select(['id as value', 'name as label'])->get()->toArray();
+
+        return view('rank-items', compact('items', 'currentUserId', 'categories'));
     }
 
     /**
