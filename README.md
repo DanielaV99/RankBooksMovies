@@ -24,13 +24,17 @@
       ```
       ./vendor/bin/sail up -d
       ```
+- Create .env file: (Only for local installation)
+    - Copy the file `.env.example` and rename it `.env`
+    - Open the `.env` file and change the `DB_HOST`, `DB_DATABASE`, `DB_USERNAME` and `DB_PASSWORD` to match your local database server.
+    - Run `php artisan key:generate`
 - Run these commands only once: (They create the database tables and add dummy data)
     - If you use local installation:
       ```
       php artisan migrate
       php artisan db:seed
       ```
-    - If you use Docker: (It might take a few minutes the first time you start the project, to install all dependencies)
+    - If you use Docker:
       ```
       ./vendor/bin/sail artisan migrate
       ./vendor/bin/sail artisan db:seed
