@@ -38,13 +38,17 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        $currentUser = Auth::user();
         Item::create([
             'title' => $request->input('title'),
-            'isApproved' => false,
-            'user_id' => Auth::id(),
+            'isApproved' => $currentUser->isAdmin,
+            'user_id' => $currentUser->id,
             'category_id' => $request->input('category'),
             'genre_id' => $request->input('genre'),
         ]);
+        if ($currentUser->isAdmin) {
+            return redirect(route('rank-items'));
+        }
         return redirect(route('item.store.success'));
     }
 
@@ -80,6 +84,23 @@ class ItemController extends Controller
         $item = Item::with(['category', 'genre', 'createdBy', 'userReviews'])->findOrFail($id);
         $currentUserId = Auth::id();
         return view('show', compact('item', 'currentUserId'));
+    }
+
+    public function createApprove()
+    {
+        $items = Item::with(['category', 'genre', 'createdBy', 'userReviews'])
+            ->where('isApproved', false)
+            ->get();
+        $currentUserId = Auth::id();
+        return view('create-approve', compact('items', 'currentUserId'));
+    }
+
+    public function createApproveStore(Request $request)
+    {
+        $item = Item::findOrFail($request->input('item_id'));
+        $item->isApproved = true;
+        $item->save();
+        return redirect(route('item.create.approve'));
     }
 
     /**

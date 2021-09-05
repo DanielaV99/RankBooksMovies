@@ -18,6 +18,11 @@
                     <x-nav-link :href="route('item.create')" :active="request()->routeIs('item.create')">
                         {{ __('Create Item') }}
                     </x-nav-link>
+                    @if (Auth::user()->isAdmin)
+                        <x-nav-link :href="route('item.create.approve')" :active="request()->routeIs('item.create.approve')">
+                            {{ __('Approve Created Items') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -72,6 +77,11 @@
             <x-responsive-nav-link :href="route('item.create')" :active="request()->routeIs('item.create')">
                 {{ __('Create Item') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->isAdmin)
+                <x-responsive-nav-link :href="route('item.create.approve')" :active="request()->routeIs('item.create.approve')">
+                    {{ __('Approve Created Items') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

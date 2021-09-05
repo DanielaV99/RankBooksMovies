@@ -21,6 +21,8 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/rank-items', [ItemController::class, 'rankItems'])->name('rank-items');
     Route::get('/create', [ItemController::class, 'create'])->name('item.create');
+    Route::get('/create-approve', [ItemController::class, 'createApprove'])->name('item.create.approve');
+    Route::post('/create-approve-store', [ItemController::class, 'createApproveStore'])->name('item.create.approve.store');
     Route::post('/store', [ItemController::class, 'store'])->name('item.store');
     Route::get('/store-success', [ItemController::class, 'storeSuccess'])->name('item.store.success');
     Route::get('/show/{id}', [ItemController::class, 'show'])->name('item.show');
