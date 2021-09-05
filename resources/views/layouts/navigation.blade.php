@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('rank-items')" :active="request()->routeIs('rank-items')">
                         {{ __('Rank Items') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('item.create')" :active="request()->routeIs('item.create')">
+                        {{ __('Create Item') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -65,6 +68,9 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('rank-items')" :active="request()->routeIs('rank-items')">
                 {{ __('Rank Items') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('item.create')" :active="request()->routeIs('item.create')">
+                {{ __('Create Item') }}
             </x-responsive-nav-link>
         </div>
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Genre;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -23,7 +25,10 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::select(['id as value', 'name as label'])->get()->toArray();
+        $genres = Genre::select(['id as value', 'name as label'])->get()->toArray();
+
+        return view('create', compact('categories', 'genres'));
     }
 
     /**

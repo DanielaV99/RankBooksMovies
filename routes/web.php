@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/rank-items', [ItemController::class, 'rankItems'])->name('rank-items');
+    Route::get('/create', [ItemController::class, 'create'])->name('item.create');
 });
 
 require __DIR__.'/auth.php';
