@@ -46,6 +46,12 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'category' => ['required', 'exists:App\Models\Category,id'],
+            'genre' => ['required', 'exists:App\Models\Genre,id'],
+        ]);
+
         $currentUser = Auth::user();
         Item::create([
             'title' => $request->input('title'),

@@ -15,15 +15,24 @@
                             <x-label for="title" :value="__('Title')" />
 
                             <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
+                            @error('title')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mt-4">
                             <x-label for="category" :value="__('Category')" />
 
                             <x-select id="category" class="block mt-1 w-full" type="text" name="category" :value="old('category')" :options="$categories" required />
+                            @error('category')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div><div class="mt-4">
                             <x-label for="genre" :value="__('Genre')" />
 
                             <x-select id="genre" class="block mt-1 w-full" type="text" name="genre" :value="old('genre')" :options="$genres" required />
+                            @error('genre')
+                                <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="flex items-center justify-end mt-4">
                             <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('rank-items') }}">
