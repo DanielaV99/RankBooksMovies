@@ -49,8 +49,22 @@ class ItemController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'category' => ['required', 'exists:App\Models\Category,id'],
-            'genre' => ['required', 'exists:App\Models\Genre,id'],
+            'genre' => ['required'],
         ]);
+
+        // Check if using an existing genre.
+        $genre = Genre::where('id', $request->input('genre'))->first();
+        if (!$genre) {
+            // Check if there is a genre with the same name.
+            $genre = Genre::where('name', 'like', '%'.$request->input('genre').'%')->first();
+
+            // No genre found. Create new one.
+            if (!$genre) {
+                $genre = new Genre;
+                $genre->name = $request->input('genre');
+                $genre->save();
+            }
+        }
 
         $currentUser = Auth::user();
         Item::create([
@@ -58,7 +72,7 @@ class ItemController extends Controller
             'isApproved' => $currentUser->isAdmin,
             'user_id' => $currentUser->id,
             'category_id' => $request->input('category'),
-            'genre_id' => $request->input('genre'),
+            'genre_id' => $genre->id,
         ]);
         if ($currentUser->isAdmin) {
             return redirect(route('rank-items'));

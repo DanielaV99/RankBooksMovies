@@ -33,6 +33,33 @@
                             @error('genre')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
+                            <div class="flex items-center">
+                                <x-input id="genre-new" class="block mt-1 w-full" type="text" name="genre-new" />
+                                <x-button id="add-genre" class="ml-4" style="width: 180px">
+                                    {{ __('Add Genre') }}
+                                </x-button>
+                                <script>
+                                    var select = document.querySelector('#genre');
+                                    var newGenreInput = document.querySelector('#genre-new');
+                                    var addGenreBtn = document.querySelector('#add-genre');
+
+                                    addGenreBtn.onclick = function($event) {
+                                        $event.preventDefault(); // Prevent form submit.
+
+                                        // create new option in the select box.
+                                        var opt = document.createElement('option');
+                                        opt.value = newGenreInput.value;
+                                        opt.innerHTML = newGenreInput.value;
+                                        select.appendChild(opt);
+
+                                        // Select the new option in the select box.
+                                        select.value = newGenreInput.value;
+
+                                        // Reset the new genre input value.
+                                        newGenreInput.value = '';
+                                    };
+                                </script>
+                            </div>
                         </div>
                         <div class="flex items-center justify-end mt-4">
                             <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('rank-items') }}">
